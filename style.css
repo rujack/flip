@@ -26,11 +26,25 @@ body{
     perspective: 300px;
 }
 
+.data{
+    display: flex;
+    justify-content: space-between;
+}
+.profile{
+    text-align: left;
+    color: #101020;
+    font-weight: 500;
+    line-height: 25px;
+}
 .stats{
+    display: flex;
     text-align: right;
     color: #101020;
     font-weight: 500;
     line-height: 25px;
+}
+.stats > span{
+    cursor: pointer;
 }
 
 .coin{
@@ -71,12 +85,12 @@ button{
     cursor: pointer;
 }
 
-#flip-button{
+#flip-button-head,#flip-button-tail{
     background: #424ae0;
     color: #fff;
 }
 
-#flip-button:disabled{
+#flip-button-head:disabled,#flip-button-tail:disabled{
     background-color: #e1e0ee;
     color: #101020;
     border-color: #e1e0ee;
