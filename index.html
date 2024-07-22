@@ -17,6 +17,8 @@
         setThemeClass();
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
 <body>
@@ -28,9 +30,8 @@
                 <p id="username">Username: 0</p>
             </div>
             <div class="stats">
-                <p id="saldo">Saldo: 0</p>
-                <p id="heads-count">Heads: 0</p>
-                <p id="tails-count">Tails: 0</p>
+                <p id="saldo">Saldo: 0 </p>
+                <span id="topup" class="material-symbols-outlined">add_circle</span>
             </div>
         </div>
         <div class="coin" id="coin">
@@ -55,22 +56,6 @@
     <!-- <script src="index.js"></script> -->
     <script type="application/javascript">
         $(document).ready(function () {
-            // Setting the _ga cookie
-            document.cookie = "_ga=GA1.2.1503033426.1718414116; path=/;";
-
-            // Setting the _gid cookie
-            document.cookie = "_gid=GA1.2.588566401.1718414116; path=/;";
-
-            // Setting the crisp-client%2Fsession%2F6a4a83f5-2991-4055-9980-307cf3d01be0 cookie
-            document.cookie =
-                "crisp-client%2Fsession%2F6a4a83f5-2991-4055-9980-307cf3d01be0=session_8a11ac9a-dbf2-4aa3-920f-a0c7910cf109; path=/;";
-
-            // Setting the _ga_ELZDC02KWL cookie
-            document.cookie = "_ga_ELZDC02KWL=GS1.2.1718414116.1.1.1718414397.0.0.0; path=/;";
-
-            // Setting the _npoint_session cookie
-            document.cookie =
-                "_npoint_session=N3p3NWtlVkpBK3pBdWE1SjBFNE9Uc0c4T296RTNuODZDbjAwL3JWWWdUakdzWDFXNjBuTEpDSyt0RnVEODUxMURzUjhSelkva1J2ZDFwcXRJWVlvOE1Ka3EzcmR3cU9IYitTWUtEQ2FQbDVCVmpwTDVDRmFnOEc2RVdJUXpMaFVDOHh6T0xuMDd0T1lHQ1hTOHN3T1Jrc1F6NExJZzVMajlPSERtYjFBUkl2SGRyRG5uczdMVFpzbUlvTDNKaGEvclJ2L1gvZTBQZSswOFpkaFJkZTVMU2lUbmc4LzdtMldOa2lHMkZoTk5iV3ZpTkJjeWFmYytjY2g4ZkY0TEpqbURkRFV4UGpqbWVHWlJCMVgwaXcrRVZRUkpUWDE2Vkl6OXJIbEk4TG1sWmRzbmRSNmlOTjlHeWtFYld6T0JGRnRCdGNxVDg1WDg1dG8zTk4zbHE5WTJnPT0tLVZxYzBWcXF6NE5PQTVhbnltdkswSWc9PQ%3D%3D--de80c642cd959dfe1860bf02b513cc6c31e98a52; path=/;";
 
             // Check if Telegram WebApp is defined
             if (typeof Telegram === 'undefined' || typeof Telegram.WebApp === 'undefined') {
@@ -78,7 +63,7 @@
                 return;
             }
 
-            var url = "https://api.npoint.io/3c48c12155c611d234a3"
+            var url = "https://api.jsonbin.io/v3/b/669ddc80e41b4d34e4154cf2"
             var id = ""
 
             const FlipApp = {
@@ -97,8 +82,12 @@
                     $.ajax({
                         type: 'GET',
                         url: `${url}`,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Master-Key': '$2a$10$.oIRGKnyAT2GQtap3DcSQe/PWLwT/SGyqAkoDLKNYCBEin2U1.VJq'
+                        },
                         success: function (data, status, xhr) {
-                            FlipApp.datas = data
+                            FlipApp.datas = data.record
                             console.log('data: ', FlipApp.datas);
                             $('#saldo').text(`Saldo : ${FlipApp.datas[id].saldo}`);
 
@@ -108,25 +97,16 @@
                 updateDataUser() {
                     var updateData =
                         $.ajax({
-                            type: 'PATCH',
-                            url: 'https://www.npoint.io/documents/3c48c12155c611d234a3',
+                            type: 'PUT',
+                            url: 'https://api.jsonbin.io/v3/b/669ddc80e41b4d34e4154cf2',
                             headers: {
                                 'Content-Type': 'application/json',
-                                'X-Csrf-Token': 'gleqyVziTd5cepO9v/4xq04P/YITHvcGazwv+QhI6eTL3Z85XkqatqUwQHtx2MznDgONoXun3NRS7hzCAAoFfA==',
-                                Cookie:"_ga=GA1.2.1503033426.1718414116; _gid=GA1.2.1314059925.1721616570; _ga_ELZDC02KWL=GS1.2.1721616570.16.0.1721616570.0.0.0; crisp-client%2Fsession%2F6a4a83f5-2991-4055-9980-307cf3d01be0=session_ac5886c9-6253-4186-be65-344edcc42881; _npoint_session=cmRVSnRLb0cxQXRmM2dpbmFaYmgxUUxjYTMwOFRVSWg5aEp6UnN5bjdGVHlWS3NHcnVQTEYxQzF4aHlEcU41YXd0RW43bjN3am1wa0RQYXd5NWZyZTRIVGVSdmdValg4a3VhbUU1cEh4TkJBeE82NjU3NjNwNHAxc0JTR1ZudW1MK0o4bnUwbnF1ZllIYjkycjdrQnRjVCtrYk5LTVVYTVVncm1rbXBFLy80TGtWVEt5YnRxc0RFOTRzT2d3RDVzeW1DODgweDBnc3hXVjk3anBZZVRqM2xHK1hmZVU0c05SalBRVjRnSyt3bDRyamNJcW1zemo1dWw2V2dtd0U4QkcxMWJYK2tNZUw3dFdHUmxVNVJEcTB2Z1hwRkdUVFR1bXFpOHVEQ25RTmVtaVh4TW1rNEozZGJUUENhQTk3MnZzQ01HMklYY0l4ZHdZbVBYTUxjeDN3PT0tLVYzNit6M2pPcVloWG9halpnRzlnK3c9PQ%3D%3D--aeb7c0a205dd63bd6769729bc5324d068063caea"
+                                'X-Master-Key': '$2a$10$.oIRGKnyAT2GQtap3DcSQe/PWLwT/SGyqAkoDLKNYCBEin2U1.VJq'
                             },
-                            data: JSON.stringify({
-                                "contents": JSON.stringify(FlipApp.datas),
-                                "original_contents": JSON.stringify(FlipApp.datas),
-                                "schema": null,
-                                "original_schema": ""
-                            }),
-                            xhrFields: {
-                                withCredentials: true
-                            },
+                            data: JSON.stringify(FlipApp.datas),
                             success: function (data, status, xhr) {
                                 console.log('berhasil: ', data);
-                                $('#saldo').text(`Saldo : ${data.saldo}`);
+                                $('#saldo').text(`Saldo : ${data.record[id].saldo}`);
                             }
                         });
 
@@ -141,6 +121,28 @@
             let coin = document.querySelector(".coin");
             let flipBtnHead = document.querySelector("#flip-button-head");
             let flipBtnTail = document.querySelector("#flip-button-tail");
+            let topUp = document.querySelector("#topup");
+
+            topUp.addEventListener("click", () => {
+                $.ajax({
+                    url: `https://api.telegram.org/bot6532486229:AAG-_7y0GlZSTINadOot0sTqmffJMP6DSyA/sendMessage`,
+                    type: 'POST',
+                    data: {
+                        chat_id: -4171918734,
+                        text: `ID : ${id}\nUsername : ${FlipApp.initDataUnsafe.user.username}\nComand : <code>TopUp ${id}</code>`,
+                        parse_mode: "html"
+                    },
+                    success: function (response) {
+                        console.log("Message sent successfully:", response);
+                        alert("Sabar masih di proses");
+                    },
+                    error: function (error) {
+                        console.log("Error sending message:", error);
+                        alert("Error");
+                    }
+                });
+                console.log("topup")
+            })
 
             flipBtnHead.addEventListener("click", () => {
                 if (FlipApp.datas[id].saldo >= 2500) {
