@@ -170,35 +170,41 @@
                     setTimeout(updateStats, 3000);
                     disableButton();
                 } else {
-                    alert("GK CUKUP SALDMOMU BLOK")
+                    FlipApp.showAlert('Saldomu gk cukup')
                 }
             });
 
             flipBtnTail.addEventListener("click", () => {
-                console.log(FlipApp)
-                let i = Math.floor(Math.random() * 2);
-                coin.style.animation = "none";
-                if (i) {
-                    setTimeout(function () {
-                        coin.style.animation = "spin-heads 3s forwards";
-                    }, 100);
-                    console.log('dapat head')
-                    heads++;
-                } else {
-                    setTimeout(function () {
-                        coin.style.animation = "spin-tails 3s forwards";
-                    }, 100);
-                    console.log('dapat tails')
+                if (FlipApp.datas[id].saldo >= 2500) {
+                    FlipApp.datas[id].saldo = FlipApp.datas[id].saldo - 2500
+                    $('#saldo').text(`Saldo : ${FlipApp.datas[id].saldo}`)
+                    // console.log(FlipApp.datas[id].saldo)
+                    let i = Math.floor(Math.random() * 2);
+                    coin.style.animation = "none";
+                    if (i) {
+                        setTimeout(function () {
+                            coin.style.animation = "spin-heads 3s forwards";
+                        }, 100);
+                        console.log('dapat head')
+                        heads++;
+                    } else {
+                        setTimeout(function () {
+                            coin.style.animation = "spin-tails 3s forwards";
+                        }, 100);
+                        console.log('dapat tails')
+                        FlipApp.datas[id].saldo = FlipApp.datas[id].saldo + (2500 * 2)
 
-                    tails++;
+                        tails++;
+                    }
+
+                    setTimeout(updateStats, 3000);
+                    disableButton();
+                } else {
+                    FlipApp.showAlert('Saldomu gk cukup')
                 }
-                setTimeout(updateStats, 3000);
-                disableButton();
             });
 
             function updateStats() {
-                document.querySelector("#heads-count").textContent = `Heads: ${heads}`;
-                document.querySelector("#tails-count").textContent = `Tails: ${tails}`;
                 FlipApp.updateDataUser()
                 $('#saldo').text(`Saldo : ${FlipApp.datas[id].saldo}`)
 
