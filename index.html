@@ -15,147 +15,203 @@
 
         Telegram.WebApp.onEvent('themeChanged', setThemeClass);
         setThemeClass();
-
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
 
     <div class="container">
-        <div class="stats">
-            <p id="heads-count">Headssss: 0</p>
-            <p id="tails-count">Tails: 0</p>
+        <div class="data">
+            <div class="profile">
+                <p id="id_user">ID: 0</p>
+                <p id="username">Username: 0</p>
+            </div>
+            <div class="stats">
+                <p id="saldo">Saldo: 0</p>
+                <p id="heads-count">Heads: 0</p>
+                <p id="tails-count">Tails: 0</p>
+            </div>
         </div>
         <div class="coin" id="coin">
             <div class="heads">
-                <img src="https://raw.githubusercontent.com/AsmrProg-YT/100-days-of-javascript/c82f3949ec4ba9503c875fc0fa7faa4a71053db7/Day%20%2307%20-%20Flip%20a%20Coin%20Game/heads.svg">
+                <img
+                    src="https://raw.githubusercontent.com/AsmrProg-YT/100-days-of-javascript/c82f3949ec4ba9503c875fc0fa7faa4a71053db7/Day%20%2307%20-%20Flip%20a%20Coin%20Game/heads.svg">
             </div>
             <div class="tails">
-                <img src="https://raw.githubusercontent.com/AsmrProg-YT/100-days-of-javascript/c82f3949ec4ba9503c875fc0fa7faa4a71053db7/Day%20%2307%20-%20Flip%20a%20Coin%20Game/tails.svg">
+                <img
+                    src="https://raw.githubusercontent.com/AsmrProg-YT/100-days-of-javascript/c82f3949ec4ba9503c875fc0fa7faa4a71053db7/Day%20%2307%20-%20Flip%20a%20Coin%20Game/tails.svg">
             </div>
         </div>
         <div class="buttons">
-            <button id="flip-button">
-                Flip Coin
+            <button id="flip-button-head">
+                Head
             </button>
-            <button id="reset-button">
-                Reset
+            <button id="flip-button-tail">
+                Tail
             </button>
         </div>
     </div>
-    <script src="index.js"></script>
+    <!-- <script src="index.js"></script> -->
     <script type="application/javascript">
-    /*
-     * This part of code is used to initialize the demo app and set up the event handlers we need.
-     */
+        $(document).ready(function () {
+            // Setting the _ga cookie
+            document.cookie = "_ga=GA1.2.1503033426.1718414116; path=/;";
 
-    Telegram.WebApp.onEvent('themeChanged', function () {
-        document.getElementById('theme_data').innerHTML = JSON.stringify(Telegram.WebApp.themeParams, null, 2);
-    });
+            // Setting the _gid cookie
+            document.cookie = "_gid=GA1.2.588566401.1718414116; path=/;";
 
-    if (DemoApp.initDataUnsafe.query_id) {
-        document.getElementById('main_btn').style.display = 'block';
-    }
-    document.getElementById('with_webview_btn').style.display = !!DemoApp.initDataUnsafe.query_id && !DemoApp.initDataUnsafe.receiver ? 'block' : 'none';
-    document.getElementById('webview_data').innerHTML         = JSON.stringify(DemoApp.initDataUnsafe, null, 2);
+            // Setting the crisp-client%2Fsession%2F6a4a83f5-2991-4055-9980-307cf3d01be0 cookie
+            document.cookie =
+                "crisp-client%2Fsession%2F6a4a83f5-2991-4055-9980-307cf3d01be0=session_8a11ac9a-dbf2-4aa3-920f-a0c7910cf109; path=/;";
 
-    document.getElementById('theme_data').innerHTML = JSON.stringify(Telegram.WebApp.themeParams, null, 2);
-    document.getElementById('regular_link').setAttribute('href', document.getElementById('regular_link').getAttribute('href') + location.hash);
-    document.getElementById('text_field').focus();
-    document.getElementById('regular_field').addEventListener('input', function (e) {
-        const val = this.value.toLowerCase();
-        if (val.indexOf('progress') >= 0) {
-            Telegram.WebApp.MainButton.showProgress();
-        } else {
-            Telegram.WebApp.MainButton.hideProgress();
-        }
-    });
+            // Setting the _ga_ELZDC02KWL cookie
+            document.cookie = "_ga_ELZDC02KWL=GS1.2.1718414116.1.1.1718414397.0.0.0; path=/;";
 
-    document.getElementById('ver').innerHTML      = Telegram.WebApp.version;
-    document.getElementById('platform').innerHTML = Telegram.WebApp.platform;
+            // Setting the _npoint_session cookie
+            document.cookie =
+                "_npoint_session=N3p3NWtlVkpBK3pBdWE1SjBFNE9Uc0c4T296RTNuODZDbjAwL3JWWWdUakdzWDFXNjBuTEpDSyt0RnVEODUxMURzUjhSelkva1J2ZDFwcXRJWVlvOE1Ka3EzcmR3cU9IYitTWUtEQ2FQbDVCVmpwTDVDRmFnOEc2RVdJUXpMaFVDOHh6T0xuMDd0T1lHQ1hTOHN3T1Jrc1F6NExJZzVMajlPSERtYjFBUkl2SGRyRG5uczdMVFpzbUlvTDNKaGEvclJ2L1gvZTBQZSswOFpkaFJkZTVMU2lUbmc4LzdtMldOa2lHMkZoTk5iV3ZpTkJjeWFmYytjY2g4ZkY0TEpqbURkRFV4UGpqbWVHWlJCMVgwaXcrRVZRUkpUWDE2Vkl6OXJIbEk4TG1sWmRzbmRSNmlOTjlHeWtFYld6T0JGRnRCdGNxVDg1WDg1dG8zTk4zbHE5WTJnPT0tLVZxYzBWcXF6NE5PQTVhbnltdkswSWc9PQ%3D%3D--de80c642cd959dfe1860bf02b513cc6c31e98a52; path=/;";
 
-    if (DemoApp.initDataUnsafe.receiver) {
-        document.getElementById('peer_wrap').style.display = 'block';
-        document.getElementById('peer_name').innerHTML     = DemoApp.initDataUnsafe.receiver.first_name + ' ' + DemoApp.initDataUnsafe.receiver.last_name;
-        if (DemoApp.initDataUnsafe.receiver.photo_url) {
-            document.getElementById('peer_photo').setAttribute('src', DemoApp.initDataUnsafe.receiver.photo_url);
-        } else {
-            document.getElementById('peer_photo').style.display = 'none';
-        }
-    } else if (DemoApp.initDataUnsafe.chat) {
-        document.getElementById('peer_wrap').style.display = 'block';
-        document.getElementById('peer_name').innerHTML     = DemoApp.initDataUnsafe.chat.title;
-        if (DemoApp.initDataUnsafe.chat.photo_url) {
-            document.getElementById('peer_photo').setAttribute('src', DemoApp.initDataUnsafe.chat.photo_url);
-        } else {
-            document.getElementById('peer_photo').style.display = 'none';
-        }
-    }
+            // Check if Telegram WebApp is defined
+            if (typeof Telegram === 'undefined' || typeof Telegram.WebApp === 'undefined') {
+                console.error('Telegram WebApp is not defined');
+                return;
+            }
 
-    DemoApp.checkInitData();
-    DemoApp.init();
+            var url = "https://api.npoint.io/3c48c12155c611d234a3"
+            var id = ""
 
-    function setViewportData() {
-        document.querySelector('.viewport-border').setAttribute('text', window.innerWidth + ' x ' + round(Telegram.WebApp.viewportHeight, 2))
-        document.querySelector('.viewport-stable_border').setAttribute('text', window.innerWidth + ' x ' + round(Telegram.WebApp.viewportStableHeight, 2) +
-            ' | is_expanded: ' + (Telegram.WebApp.isExpanded ? 'true' : 'false'));
-    }
+            const FlipApp = {
+                initData: Telegram.WebApp.initData || '',
+                initDataUnsafe: Telegram.WebApp.initDataUnsafe || {},
+                MainButton: Telegram.WebApp.MainButton,
+                BackButton: Telegram.WebApp.BackButton,
+                SettingsButton: Telegram.WebApp.SettingsButton,
+                datas: "",
+                setDataUser() {
+                    $('#id_user').text(`ID : ${FlipApp.initDataUnsafe.user.id}`);
+                    $('#username').text(FlipApp.initDataUnsafe.user.username);
+                    id = FlipApp.initDataUnsafe.user.id
+                },
+                getDataUser() {
+                    $.ajax({
+                        type: 'GET',
+                        url: `${url}`,
+                        success: function (data, status, xhr) {
+                            FlipApp.datas = data
+                            console.log('data: ', FlipApp.datas);
+                            $('#saldo').text(`Saldo : ${FlipApp.datas[id].saldo}`);
 
-    Telegram.WebApp.setHeaderColor('secondary_bg_color');
-    Telegram.WebApp.onEvent('viewportChanged', setViewportData);
-    setViewportData();
+                        }
+                    });
+                },
+                updateDataUser() {
+                    var updateData =
+                        $.ajax({
+                            type: 'PATCH',
+                            url: 'https://www.npoint.io/documents/3c48c12155c611d234a3',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-Csrf-Token': 'gleqyVziTd5cepO9v/4xq04P/YITHvcGazwv+QhI6eTL3Z85XkqatqUwQHtx2MznDgONoXun3NRS7hzCAAoFfA==',
+                                Cookie:"_ga=GA1.2.1503033426.1718414116; _gid=GA1.2.1314059925.1721616570; _ga_ELZDC02KWL=GS1.2.1721616570.16.0.1721616570.0.0.0; crisp-client%2Fsession%2F6a4a83f5-2991-4055-9980-307cf3d01be0=session_ac5886c9-6253-4186-be65-344edcc42881; _npoint_session=cmRVSnRLb0cxQXRmM2dpbmFaYmgxUUxjYTMwOFRVSWg5aEp6UnN5bjdGVHlWS3NHcnVQTEYxQzF4aHlEcU41YXd0RW43bjN3am1wa0RQYXd5NWZyZTRIVGVSdmdValg4a3VhbUU1cEh4TkJBeE82NjU3NjNwNHAxc0JTR1ZudW1MK0o4bnUwbnF1ZllIYjkycjdrQnRjVCtrYk5LTVVYTVVncm1rbXBFLy80TGtWVEt5YnRxc0RFOTRzT2d3RDVzeW1DODgweDBnc3hXVjk3anBZZVRqM2xHK1hmZVU0c05SalBRVjRnSyt3bDRyamNJcW1zemo1dWw2V2dtd0U4QkcxMWJYK2tNZUw3dFdHUmxVNVJEcTB2Z1hwRkdUVFR1bXFpOHVEQ25RTmVtaVh4TW1rNEozZGJUUENhQTk3MnZzQ01HMklYY0l4ZHdZbVBYTUxjeDN3PT0tLVYzNit6M2pPcVloWG9halpnRzlnK3c9PQ%3D%3D--aeb7c0a205dd63bd6769729bc5324d068063caea"
+                            },
+                            data: JSON.stringify({
+                                "contents": JSON.stringify(FlipApp.datas),
+                                "original_contents": JSON.stringify(FlipApp.datas),
+                                "schema": null,
+                                "original_schema": ""
+                            }),
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                            success: function (data, status, xhr) {
+                                console.log('berhasil: ', data);
+                                $('#saldo').text(`Saldo : ${data.saldo}`);
+                            }
+                        });
 
-    let prevBgColorVal   = document.getElementById('bg_color_sel').value;
-    const bgColorInput   = document.getElementById('bg_color_input');
-    const headerColorSel = document.getElementById('header_color_sel');
+                }
+            };
 
-    bgColorInput.value = Telegram.WebApp.backgroundColor;
-    document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
-    headerColorSel.value = 'secondary_bg_color';
-    headerColorSel.addEventListener('change', function (e) {
-        const colorKey = e.target.value;
-        document.getElementById('top_sect').classList.toggle('second', colorKey === 'secondary_bg_color');
-        Telegram.WebApp.setHeaderColor(colorKey);
-        document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
-    });
-    bgColorInput.addEventListener('change', function (e) {
-        const color                                         = e.target.value;
-        document.getElementById('bg_color_val').textContent = color;
-        headerColorSel.value                                = 'custom';
-        prevBgColorVal                                      = document.getElementById('bg_color_sel').value;
-        Telegram.WebApp.setBackgroundColor(color);
-        document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
-    });
-    headerColorSel.addEventListener('change', function (e) {
-        const colorKey = e.target.value;
-        if (colorKey === 'custom') {
-            headerColorSel.value = prevBgColorVal;
-            bgColorInput.focus();
-        } else {
-            document.getElementById('bg_color_val').textContent = 'custom...';
-            Telegram.WebApp.setBackgroundColor(colorKey);
-            document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
-            bgColorInput.value = Telegram.WebApp.backgroundColor;
-            prevBgColorVal     = headerColorSel.value;
-        }
-    });
+            FlipApp.setDataUser();
+            FlipApp.getDataUser()
 
-    Telegram.WebApp.onEvent('themeChanged', function () {
-        bgColorInput.value = Telegram.WebApp.backgroundColor;
-        document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
-    });
+            let heads = 0;
+            let tails = 0;
+            let coin = document.querySelector(".coin");
+            let flipBtnHead = document.querySelector("#flip-button-head");
+            let flipBtnTail = document.querySelector("#flip-button-tail");
 
-    try {
-        DemoApp.testClipboard(document.getElementById('clipboard_test'));
-    } catch(e) {}
+            flipBtnHead.addEventListener("click", () => {
+                if (FlipApp.datas[id].saldo >= 2500) {
+                    FlipApp.datas[id].saldo = FlipApp.datas[id].saldo - 2500
+                    $('#saldo').text(`Saldo : ${FlipApp.datas[id].saldo}`)
+                    // console.log(FlipApp.datas[id].saldo)
+                    let i = Math.floor(Math.random() * 2);
+                    coin.style.animation = "none";
+                    if (i) {
+                        setTimeout(function () {
+                            coin.style.animation = "spin-heads 3s forwards";
+                        }, 100);
+                        console.log('dapat head')
+                        FlipApp.datas[id].saldo = FlipApp.datas[id].saldo + (2500 * 2)
+                        heads++;
+                    } else {
+                        setTimeout(function () {
+                            coin.style.animation = "spin-tails 3s forwards";
+                        }, 100);
+                        console.log('dapat tails')
 
-    try {
-        DemoApp.loadCloudKeys();
-    } catch(e) {}
+                        tails++;
+                    }
 
-    try {
-        DemoApp.biometricInit();
-    } catch(e) {}
-</script>
+                    setTimeout(updateStats, 3000);
+                    disableButton();
+                } else {
+                    alert("GK CUKUP SALDMOMU BLOK")
+                }
+            });
+
+            flipBtnTail.addEventListener("click", () => {
+                console.log(FlipApp)
+                let i = Math.floor(Math.random() * 2);
+                coin.style.animation = "none";
+                if (i) {
+                    setTimeout(function () {
+                        coin.style.animation = "spin-heads 3s forwards";
+                    }, 100);
+                    console.log('dapat head')
+                    heads++;
+                } else {
+                    setTimeout(function () {
+                        coin.style.animation = "spin-tails 3s forwards";
+                    }, 100);
+                    console.log('dapat tails')
+
+                    tails++;
+                }
+                setTimeout(updateStats, 3000);
+                disableButton();
+            });
+
+            function updateStats() {
+                document.querySelector("#heads-count").textContent = `Heads: ${heads}`;
+                document.querySelector("#tails-count").textContent = `Tails: ${tails}`;
+                FlipApp.updateDataUser()
+                $('#saldo').text(`Saldo : ${FlipApp.datas[id].saldo}`)
+
+            }
+
+            function disableButton() {
+                flipBtnHead.disabled = true;
+                flipBtnTail.disabled = true;
+                setTimeout(function () {
+                    flipBtnHead.disabled = false;
+                    flipBtnTail.disabled = false;
+                }, 3000);
+            }
+        });
+    </script>
 </body>
+
 </html>
